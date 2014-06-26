@@ -50,3 +50,5 @@ gem 'font-awesome-rails'
 
 gem 'kaminari'
 
+gem 'haml'
+gem 'haml-rails'

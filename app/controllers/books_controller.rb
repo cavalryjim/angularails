@@ -6,13 +6,8 @@ class BooksController < ApplicationController
     @books = Book.all
 
     respond_to do |format|
-      format.html {
-        @books_json = @books.map{ |b| BookSerializer.new(b).serializable_hash }
-        @urls = {
-            books: books_path
-        }
-      }
-      format.json { render json: @books }
+      format.html {   }
+      format.json { render json: @books, root: false, each_serializer: BookSerializer }
     end
   end
 
@@ -36,7 +31,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, flash[:notice] => 'Book was successfully created.' }
         format.json { render json: @book }
       else
         format.html { render action: 'new' }
@@ -50,7 +45,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html {redirect_to @book, notice: 'book successfully updated'}
+        format.html {redirect_to @book, flash[:notice] => 'book successfully updated'}
         format.json { render json: @book }
       else
         format.html { render action: 'edit' }
@@ -64,7 +59,7 @@ class BooksController < ApplicationController
     @book.destroy
     respond_to do |format|
       format.html {
-        redirect_to books_url, notice: 'Book was successfully destroyed.'
+        redirect_to books_url, flash[:notice] => 'Book was successfully destroyed.'
       }
       format.json { render json: { message: "Book was deleted"} }
     end
