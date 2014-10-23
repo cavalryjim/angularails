@@ -4,21 +4,19 @@ class BooksController < ApplicationController
   # GET /books
   def index
     @books = Book.all
-
+      
     respond_to do |format|
-      format.html {
-        @books_json = @books.map{ |b| BookSerializer.new(b).serializable_hash }
-        @urls = {
-            books: books_path
-        }
-      }
-      format.json { render json: @books }
+      format.html { }
+      format.json { render json: @books, root: false, each_serializer: BookSerializer }
     end
   end
 
-
   # GET /books/1
   def show
+    respond_to do |format|
+      format.html { }
+      format.json { render json: @book, root: false }
+    end
   end
 
   # GET /books/new
@@ -32,42 +30,32 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    @book = Book.create(book_params)
+    @book = Book.new(book_params)
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render json: @book }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.save
+      redirect_to @book, notice: 'Book was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
-
   # PATCH/PUT /books/1
   def update
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html {redirect_to @book, notice: 'book successfully updated'}
-        format.json { render json: @book }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.update(book_params)
+      redirect_to @book, notice: 'Book was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   # DELETE /books/1
   def destroy
     @book.destroy
-    respond_to do |format|
-      format.html {
-        redirect_to books_url, notice: 'Book was successfully destroyed.'
-      }
-      format.json { render json: { message: "Book was deleted"} }
-    end
+    redirect_to books_url, notice: 'Book was successfully destroyed.'
+  end
+  
+  def do_nothing
+    # ...and do nothing
   end
 
   private
@@ -80,5 +68,4 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:title, :author)
     end
-
 end

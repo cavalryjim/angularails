@@ -1,30 +1,19 @@
-AngulaRails.controller "BooksController", ($scope, $http) ->
-
+AngulaRails.controller "BooksController", ($scope, Book) ->
+  $scope.book = {}
   $scope.getBooks = () ->
-    $http({ method: "GET", url: $scope.urls.books })
-      .success (response) ->
-        $scope.books = response.books
+    $scope.books = Book.query()
+
+  $scope.edit = (book) ->
+    $scope.book = Book.get({ id: book.id })
+  
+  $scope.delete = (book) ->
+    book.$delete()
+    $scope.getBooks()
 
   $scope.save = () ->
     if $scope.book.id?
-        $http({ method: "PUT", url: $scope.book.url, data: $scope.book })
-        .success (response) ->
-          $scope.book ={}
-          $scope.getBooks()
+      Book.update($scope.book)
     else
-      $http({ method: "POST", url: $scope.urls.books, data: $scope.book })
-        .success (response) ->
-          $scope.book = {}
-          $scope.getBooks()
-
-  $scope.delete = (book) ->
-    $http({ method: "DELETE", url: book.url })
-      .success (response) ->
-        $scope.getBooks()
-
-  $scope.edit = (book) ->
-    $scope.book =
-      id: book.id
-      title: book.title
-      author: book.author
-      url: book.url
+      Book.save($scope.book)
+    $scope.book = {}
+    $scope.getBooks()

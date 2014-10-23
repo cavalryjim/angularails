@@ -1,14 +1,16 @@
 Angularails::Application.routes.draw do
+  resources :games
+
   resources :books
 
   get "git_http/show"
   resources :widgets
 
-  get "models_need_dots/show"
   get "taco_order/edit"
   get "hello_angular/show"
-
-
+  get "models_need_dots/show"
+  delete 'books' => 'books#do_nothing'
+  root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -49,7 +51,7 @@ Angularails::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-
+  
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

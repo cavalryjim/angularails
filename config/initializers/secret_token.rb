@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Angularails::Application.config.secret_key_base = '99da32a01906fda160d38332648c4151b369f4505e7e0e4f86eae64ceb900e3962fd9d8cdf38a85445590e4a7b8cb2b3b7a80ca762a9706b37759c98820eddd1'
+Angularails::Application.config.secret_key_base = 'e7ed9db662a6b7ad7755c6724ac932466f018b3d0c4828ee1239a62861da933335c84fbc6425fba12540b0081c62679398d16fd26d2463ae29854e1d6d176177'
