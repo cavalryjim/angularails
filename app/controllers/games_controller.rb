@@ -4,7 +4,11 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.page(params[:page]).per(10)
+    respond_to do |format|
+      format.html { }
+      format.json { render json: @games }
+    end
   end
 
   # GET /games/1

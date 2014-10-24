@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'active_model_serializers', '~> 0.8.0'
 gem 'font-awesome-rails'
+gem 'kaminari'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
