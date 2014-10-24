@@ -7,7 +7,12 @@ class GamesController < ApplicationController
     @games = Game.page(params[:page]).per(10)
     respond_to do |format|
       format.html { }
-      format.json { render json: @games }
+      format.json { render json: @games, meta: {
+        number_of_pages: @games.num_pages,
+        current_page: @games.current_page,
+        total_count: @games.total_count
+        } 
+      }
     end
   end
 

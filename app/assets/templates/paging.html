@@ -1,0 +1,21 @@
+  	<!--- 
+<ul class="pagination">
+  	
+  	
+  	<li><a href="#" ng-click='setPage(currentPage - 1)'>&laquo;</a></li>
+  	<li ng-repeat="page in pages" ng-class="{ active: currentPage == page}">
+  	  <li><a href="#" ng-click='setPage(page)'>{{ page }}</a></li>
+  	</li>
+  	<li><a href="#" ng-click='setPage(currentPage + 1)'>&raquo;</a></li>
+</ul>
+  		--->
+
+<ul class="pagination">
+  <li><a ng-click="setPage(currentPage - 1)">&laquo;</a></li>
+  <li ng-repeat="page in pages" ng-class="{ active: currentPage == page }">
+    <a ng-click="setPage(page)">
+      {{ page }}
+    </a>
+  </li>
+  <li><a ng-click="setPage(currentPage + 1)">&raquo;</a></li>
+</ul>
