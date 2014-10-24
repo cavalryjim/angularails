@@ -1,4 +1,5 @@
 Angularails::Application.routes.draw do
+  get "routing/show"
   resources :games
 
   resources :books
